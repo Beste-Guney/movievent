@@ -1,0 +1,50 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div id="breadcrumb" class="hoc clear"> 
+    <h6 class="heading">Event Create </h6>
+</div>
+<div class="wrapper row3">
+  <main class="hoc container clear"> 
+  <form method="post" id="event_choices" enctype="multipart/form-data" data-theaters-url="{% url 'ajax_load_theaters' %}"  data-sessions-url = "{% url 'ajax_load_sessions' %}" novalidate>
+    {% csrf_token %}
+    {% include 'includes/form.html' %}
+    <button type="submit" class="btn btn-success">Create</button>
+  </form>
+
+  <script src="/static/js/jquery-3.6.0.min.js"></script>
+  <script>
+    $("#id_movie").change(function () {
+      var url = $("#event_choices").attr("data-theaters-url"); 
+      var url2 = $("#event_choices").attr("data-sessions-url");
+      var movieId = $(this).val();  
+
+      $.ajax({                       
+        url: url,                    
+        data: {
+          'movie': movieId      
+        },
+        success: function (data) {  
+          $("#id_theater").html(data);  
+        }
+      });
+
+      $.ajax({                       
+        url: url2,                    
+        data: {
+          'movie': movieId       
+        },
+        success: function (data) {   
+          $("#id_time").html(data);  
+        }
+      });
+
+    });
+
+    
+  
+  </script>
+
+  </main>
+</div>
+{% endblock %}

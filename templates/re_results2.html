@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <div class="wrapper row3">
+        <main class="hoc container clear">
+        {% if recommendations %}
+        <h2>
+            Because you enjoyed;
+        </h2>
+            {% for movie in movies %}
+                <li>
+                 {{ movie.title }}
+                </li>
+            {% endfor %}
+
+        <h2>
+            You may enjoy these movies from {{ friend.username }}
+        </h2>
+        {% for recommend in recommendations %}
+            <h3>{{ recommend.title }}</h3>
+                <li>
+                 <img src="{{ recommend.poster_path }}">
+                </li>
+            {% endfor %}
+        {% else %}
+        <p>Sorry, could not decide what to suggest from {{ friend.username }}</p>
+        {% endif %}
+        </main></div>
+{% endblock %}

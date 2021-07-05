@@ -1,0 +1,73 @@
+{% extends 'index.html' %}
+{% block content %}
+    <div class="wrapper row3">
+         <main class="hoc container clear">
+             <figure>
+            <ul class="nospace clear">
+            <p>From your choices: </p>
+                {% for x in your_1 %}
+            {% if forloop.counter0|divisibleby:4 %}
+                 <li class="one_quarter first"><a href="{% url 'movie' x.slug %}"><img src="{{x.poster_path}}" alt=""></a></li>
+            {% else %}
+                <li class="one_quarter"><a href="{% url 'movie' x.slug %}"><img src="{{x.poster_path}}" alt=""></a></li>
+            {% endif %}
+                {% endfor %}
+            </ul>
+            <p>You may enjoy these movies from {{ friend.username }}</p>
+             <ul>
+                 {% for x in category_1 %}
+            {% if forloop.counter0|divisibleby:4 %}
+                 <li class="one_quarter first"><a href="{% url 'movie' x.slug %}"><img src="{{x.poster_path}}" alt=""></a></li>
+            {% else %}
+                <li class="one_quarter"><a href="{% url 'movie' x.slug %}"><img src="{{x.poster_path}}" alt=""></a></li>
+            {% endif %}
+                {% endfor %}
+             </ul>
+            </figure>
+
+         <figure>
+            <ul class="nospace clear">
+            <p>From your choices: </p>
+                {% for x in your_2 %}
+            {% if forloop.counter0|divisibleby:4 %}
+                 <li class="one_quarter first"><a href="{% url 'movie' x.slug %}"><img src="{{x.poster_path}}" alt=""></a></li>
+            {% else %}
+                <li class="one_quarter"><a href="{% url 'movie' x.slug %}"><img src="{{x.poster_path}}" alt=""></a></li>
+            {% endif %}
+                {% endfor %}
+            </ul>
+            <p>You may enjoy these movies from {{ friend.username }}</p>
+             <ul>
+                 {% for x in category_2 %}
+            {% if forloop.counter0|divisibleby:4 %}
+                 <li class="one_quarter first"><a href="{% url 'movie' x.slug %}"><img src="{{x.poster_path}}" alt=""></a></li>
+            {% else %}
+                <li class="one_quarter"><a href="{% url 'movie' x.slug %}"><img src="{{x.poster_path}}" alt=""></a></li>
+            {% endif %}
+                {% endfor %}
+             </ul>
+            </figure>
+         <figure>
+            <ul class="nospace clear">
+            <p>From your choices: </p>
+                {% for x in your_3 %}
+            {% if forloop.counter0|divisibleby:4 %}
+                 <li class="one_quarter first"><a href="{% url 'movie' x.slug %}"><img src="{{x.poster_path}}" alt=""></a></li>
+            {% else %}
+                <li class="one_quarter"><a href="{% url 'movie' x.slug %}"><img src="{{x.poster_path}}" alt=""></a></li>
+            {% endif %}
+                {% endfor %}
+            </ul>
+            <p>You may enjoy these movies from {{ friend.username }}</p>
+             <ul>
+                 {% for x in category_3 %}
+            {% if forloop.counter0|divisibleby:4 %}
+                 <li class="one_quarter first"><a href="{% url 'movie' x.slug %}"><img src="{{x.poster_path}}" alt=""></a></li>
+            {% else %}
+                <li class="one_quarter"><a href="{% url 'movie' x.slug %}"><img src="{{x.poster_path}}" alt=""></a></li>
+            {% endif %}
+                {% endfor %}
+             </ul>
+            </figure>
+         </main></div>
+{% endblock %}

@@ -1,0 +1,2 @@
+from sklearn_text_extensions.feature_extraction.bm25_tfidf_vectorizer import BM25TfidfVectorizer  # noqa:F401
+from sklearn_text_extensions.feature_extraction.strict_count_vectorizer import StrictCountVectorizer  # noqa:F401

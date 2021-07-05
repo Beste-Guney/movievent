@@ -1,0 +1,86 @@
+{% extends 'index.html '%}
+{% block content %}
+
+<div class="wrapper row3">
+  <main class="hoc container clear"> 
+    <!-- main body -->
+    <!-- ################################################################################################ -->
+    <div class="content three_quarter first"> 
+      <!-- ################################################################################################ -->
+      <h1>Name of The Event: {{event.name}}</h1>
+      <h2>Time: {{event.date}}</h2>
+      <a href="{% url 'movie' event.movie.slug %}"><img class="imgr borderedbox inspace-5" src="{{event.movie.poster_path}}" alt=""></a>
+      <br><br>
+      <h1>Event Status </h1>
+      <div class="scrollable">
+        {% if not is_self %}
+        {% if is_there_request %}
+        <a class="btn btn-primary" href="{% url 'accept_event_request' event_request.id %}" role="button" >Join Event</a>
+        <a class="btn btn-primary" href="{% url 'decline_event_request' event_request.id %}" role="button" >Decline Event</a>
+        {% else %}
+        <a class="btn btn-primary" href="{% url 'create_topic' event.id %}" role="button">Review Event</a>
+        <a class="btn btn-primary" href="{% url 'leaveEvent' event.id %}" role="button">Leave Event</a>
+        {% endif %}
+        {% else %}
+        <a class="btn btn-primary" href="{% url 'cancel_event' event.id %}" role="button" onclick="return confirm('Are you sure canceling this event?');">Cancel Event</a>
+        <a class="btn btn-primary" href="{% url 'create_topic' event.id %}" role="button">Review Event</a>
+        {% endif %}
+      </div>
+      <br><br><br><br><br><br>
+      <div id="comments">
+        <h2>Comments</h2>
+        <ul>
+            {% for topic in topics %}
+            <li>
+                <article>
+                  <header>
+                    <figure class="avatar"><img src="/static/img/avatar.png" alt=""></figure>
+                    <address>
+                    By <a href="#">{{topic.starter.username}}</a>
+                    </address>
+                    <p>Last Updated: {{topic.last_updated}}</p>
+                  </header>
+                  <div class="comcont">
+                    <p>{{topic.subject}}</p>
+                  </div>
+                </article>
+                <a class="btn btn-primary" href="{% url 'reply_topic' topic.id %}" role="button" >Reply</a>
+              </li>
+            {% endfor %}
+        </ul>
+        
+      </div>
+      <!-- ################################################################################################ -->
+    </div>
+
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <div class="sidebar one_quarter"> 
+      <!-- ################################################################################################ -->
+      <h6>Participants</h6>
+      <nav class="sdb_holder">
+        <li><a href="{% url 'profile' event.owner.id %}">Owner: {{event.owner.username}}</a></li>
+        <ul>
+            {% for p in event.participants.all %}
+              <li>
+                <a href="{% url 'profile' p.id %}">{{p.username}}</a>
+              </li>
+            {% endfor %}
+
+        </ul>
+      </nav>
+      <div class="sdb_holder">
+        <h6>Location</h6>
+        <p>{{event.theater.name}}</p>
+      </div>
+      <!-- ################################################################################################ -->
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- / main body -->
+    <div class="clear"></div>
+  </main>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+{% endblock %}

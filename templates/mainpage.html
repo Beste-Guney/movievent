@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}MoviEvent{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Viaoda+Libre&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    {% block javascript %}{% endblock %}
+    {% block stylesheet %}{% endblock %}  
+  </head>
+
+  <body style="background-image: url(/static/img/xv.png);">
+
+  {% block body %}  
+    <nav class="navbar navbar-expand-sm navbar-dark bg-danger">
+      <div class="container">
+        <a class="navbar-brand text-center logo my-4" href="{% url 'main' %}" style="font-family: 'Viaoda Libre', cursive; font-size: 64px;">MoviEvent</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div>
+          <a class="navbar-brand" href="{% url 'allmovies' %}">Movies</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        </div>
+
+        <div>
+          <a class="navbar-brand" href="{% url 'theaters' %} "> Theaters</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        </div>
+
+        <div>
+          <a class="navbar-brand" href="{% url 'past_events' %}">Past Activities</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        </div>
+
+        <div>
+          <a class="navbar-brand" href="{% url 'events' %}" >Upcoming Activities</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          {% if user.is_authenticated %}
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{ user.username }}
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
+                  <a class="dropdown-item" href="{% url 'myprofile' %}">My account</a>
+                  <a class="dropdown-item" href="#">Change password</a>
+                  <a class='dropdown-item' href="{% url 'event_request' %}"> Event Requests</a>
+                  <a class='dropdown-item' href="{% url 'friend_requests'%}"> Friend Requests</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
+                </div>
+                
+              </li>
+            </ul>
+          {% else %}
+            <form class="form-inline ml-auto">
+              <a href="#" class="btn btn-outline-secondary">Log in</a>
+              <a href="{% url 'signup' %}" class="btn btn-primary ml-2">Sign up</a>
+            </form>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+      <div class="container"  >
+        <ol class="breadcrumb my-4 bg-danger"  >
+
+          {% block breadcrumb %}
+            
+            <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'search' %}" >
+               <input class="form-control mr-sm-2" type="search" name="search" style="max-width: 100%;">
+               <button class="btn btn btn-outline-info my-2 my-sm-0 " type="submit"> Search </button>
+            </form>
+            
+          {% endblock %}
+        </ol>
+            
+          {% block content %}
+            <div class="row"> 
+              <div class="container border border-danger col-2 " style="margin-right: 0%;" >
+                <ol style="font-size: 20px;">
+                  <i>Friends </i>
+                </ol>
+                  {% for friend in owner_profile.friends.all %}
+                  <li><a href="{% url 'profile' friend.id %}">{{friend.username}}</a></li> 
+                  {% endfor %}
+              </div>
+              <div class= 'col'>
+                <a class="btn btn-primary" href="{% url 'createEvent' %}" role="button">Create a Event</a>
+              </div>
+            </div>
+          {% endblock %}
+      </div>
+
+  {% endblock body %}
+  <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  
+  </body>
+
+</html>

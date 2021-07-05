@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="wrapper row3">
+    <main class="hoc container clear"> 
+        <div class="content">
+            <ul>
+                {% for x in requests %}
+                {% if x.event.is_past %} 
+                <li>
+                    {{x.event.name}}
+                </li>
+                <p>Owner: {{x.event.owner.username}}</p>
+                <a href="{% url 'past_event_info' x.event.slug %}">Click here for more detailed information about this request</a>
+                <br><br>
+                {% else %}
+                <li>
+                    {{x.event.name}}
+                </li>
+                <p>Owner: {{x.event.owner.username}}</p>
+                <a href="{% url 'eventInfo' x.event.slug %}">Click here for more detailed information about this request</a>
+                <br><br>
+                {% endif %}
+                {% endfor %}
+        </div>
+        
+    </main></div>
+{% endblock %}

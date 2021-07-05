@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div id="breadcrumb" class="hoc clear"> 
+    <h6 class="heading">Update Profile </h6>
+</div>
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    <h1>
+        {{user.username}}
+    </h1>
+    
+    <form method="post" id="update_profile" novalidate enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include 'includes/form.html' %}
+        <button type="submit" class="btn btn-success">Update</button>
+      </form>
+  </main></div>
+{% endblock %}

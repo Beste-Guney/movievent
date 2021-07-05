@@ -1,0 +1,17 @@
+body {
+    background-image: url(/static/img/xv.png);
+  }
+  
+  .logo {
+    font-family: 'Viaoda Libre', cursive;
+     font-size: 64px;
+  }
+  
+  .logo a {
+    color: rgba(0,0,0,.9);
+  }
+  
+  .logo a:hover,
+  .logo a:active {
+    text-decoration: none;
+  }

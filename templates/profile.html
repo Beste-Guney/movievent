@@ -1,0 +1,48 @@
+{% extends 'index.html'%}
+{% block content %}
+
+  <div id="breadcrumb" class="hoc clear"> 
+    <h6 class="heading">{{receiver.username}}</h6>
+  </div>
+</div>
+<div class="wrapper row3">
+  <main class="hoc container clear"> 
+    <div class="sidebar one_quarter first"> 
+      <!-- ################################################################################################ -->
+      <h6>Friends of Profile</h6>
+      <nav class="sdb_holder">
+        <ul>
+            {% for friend in profile_receiver.friends.all %}
+            <li><a href="{% url 'profile' friend.id %}">{{friend.username}}</a></li>
+            {% endfor %}
+        </ul>
+      </nav>
+      <!-- ################################################################################################ -->
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <div class="content three_quarter"> 
+      <!-- ################################################################################################ -->
+      <img class="imgr borderedbox inspace-5" src="/static/img/avatar.png" alt="">
+      <p>{{profile_receiver.bio}}</p>
+        <p>favourite Style:{{profile_receiver.favourite_style}}</p>
+
+        <div class="scrollable">
+            {% if is_self %}
+        <a class="btn btn-primary" href="#" role="button">Your Account</a>
+        {% elif is_friends %}
+        <a class="btn btn-primary" href="{% url 'cancel_friendship' receiver.id %}" role="button" onclick="return confirm('Are you sure ending this friendship?');">Cancel Friendship</a>
+        <a class="btn btn-primary" href="{% url 'createEvent' %}" role="button">Create a event together</a>
+        {% elif is_there_request %}
+        <a class="btn btn-primary" href="{% url 'cancel_request' friend_request1.id %}" role="button" id="id_cancel_friend_request_button" onclick="return confirm('Are you sure canceling the request?');">Cancel request</a>
+        {% elif is_there_invitation %}
+        <a class="btn btn-primary" href="{% url 'accept_friend_request' friend_request2.id %}" role="button" id="id_send_friend_request_button" onclick="return confirm('Are you sure accepting invitation?');">Accept Invitation</a>
+        <a class="btn btn-primary" href="{% url 'decline_invitation' friend_request2.id %}" role="button" id="id_send_friend_request_button" onclick="return confirm('Are you sure declining the invitation?');">Decline Invitation</a>
+        {% elif not is_there_request %}
+        <a class="btn btn-primary" href="{% url 'send_request' receiver.id %}" role="button" id="id_cancel_friend_request_button" onclick="return confirm('Are you sure sending a request to this user?');">Send request</a>
+        {% endif %}
+        </div>
+    </div>
+  </main>
+</div>
+{% endblock %}

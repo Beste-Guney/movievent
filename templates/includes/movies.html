@@ -1,0 +1,71 @@
+{% extends 'index.html' %}
+{% block content %}
+
+{% block header %}
+<div id="breadcrumb" class="hoc clear"> 
+  <h6 class="heading">Movies</h6>
+</div>
+{% endblock %}
+  
+<div class="wrapper row3">
+  <main class="hoc container clear"> 
+    <div class="content"> 
+      <!-- ################################################################################################ -->
+      <div id="gallery">
+        <figure>
+            <ul class="nospace clear">
+                {% for x in movies %}
+            {% if forloop.counter0|divisibleby:4 %}
+                 <li class="one_quarter first"><a href="{% url 'movie' x.slug %}"><img src="{{x.poster_path}}" alt=""></a></li>
+            {% else %}
+                <li class="one_quarter"><a href="{% url 'movie' x.slug %}"><img src="{{x.poster_path}}" alt=""></a></li>
+            {% endif %}
+                {% endfor %}
+            </ul>
+        
+        </figure>
+        {% if is_paginated %}
+      <nav aria-label="Movies pagination" class="mb-4">
+        <ul class="pagination">
+          {% if page_obj.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            </li>
+          {% else %}
+            <li class="page-item disabled">
+              <span class="page-link">Previous</span>
+            </li>
+          {% endif %}
+
+          {% for page_num in paginator.page_range %}
+            {% if page_obj.number == page_num %}
+              <li class="page-item active">
+                <span class="page-link">
+                  {{ page_num }}
+                  <span class="sr-only">(current)</span>
+                </span>
+              </li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+
+          {% if page_obj.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+            </li>
+          {% else %}
+            <li class="page-item disabled">
+              <span class="page-link">Next</span>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+  {% endif %}
+      </div>
+     
+</div>
+{% endblock %}
+

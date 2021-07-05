@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="wrapper row3">
+    <main class="hoc container clear"> 
+      <!-- main body -->
+      <!-- ################################################################################################ -->
+      <div class="content"> 
+    <h1>{{profile_user.user.username}}</h1>
+    <p>Bio: {{profile_user.bio}}</p>
+    <p>Favourite Movie Genre: {{profile_user.favourite_style}}</p>
+    <a class="btn btn-primary" href="{% url 'update_profile' %}" role="button">Update Profile</a>
+      </div></main></div>
+{% endblock %}

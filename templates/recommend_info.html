@@ -1,0 +1,22 @@
+{% extends 'index.html '%}
+{% block content %}
+
+<div class="wrapper row3">
+  <main class="hoc container clear">
+  <ul>
+   {% for x in movies %}
+   {% if forloop.counter0|divisibleby:2 %}
+
+     <li class="one_quarter first"><a href="{% url 'movie' x.slug %}"><img src="{{x.poster_path}}" alt=""></a></li>
+     <center><p class="one_quarter">{{x.overview}}</p></center>
+     <br><br><br><br><br><br><br>
+   {% else %}
+  <center><p class="one_quarter first">{{x.overview}}</p></center>
+  <li class="three_quarter"><a href="{% url 'movie' x.slug %}"><img src="{{x.poster_path}}" alt=""></a></li>
+   <br><br><br><br><br><br><br>
+  {% endif %}
+   {% endfor %}
+  </ul>
+  </main></div>
+
+{% endblock %}

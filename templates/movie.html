@@ -1,0 +1,141 @@
+{% extends 'index.html '%}
+
+
+{% block content %}
+
+
+  <div id="breadcrumb" class="hoc clear"> 
+    <h6 class="heading">{{movie.title}}</h6>
+  </div>
+</div>
+<div class="wrapper row3">
+  <main class="hoc container clear"> 
+    
+    <div class="content"> 
+      <!-- ################################################################################################ -->
+      <h1>Original Title: <i>{{movie.original_title}}</i></h1>
+        <h2> Release Date: {{ movie.release_date }}</h2>
+      <img class="imgr borderedbox inspace-5" src="{{movie.poster_path}}">
+      <p>{{movie.overview}}</p>
+      <br><br><br><br><br><br><br><br><br><br><br><br>
+      <h1>Session(s)</h1>
+      {% if theaters %}
+      <div class="scrollable">
+        <table>
+          <thead>
+            <tr>
+                {% for theater in theaters %}
+                <th>{{ theater.name }}</th>
+                {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+              {% for ses in sessions %}
+              <tr>
+                {% for theater in theaters %}
+                <td> <a class="btn" href="{% url 'create_specific_event' movie.slug theater.slug ses.id %}" role="button">{{ses.session_times}}</a></td>
+                {% endfor %}
+              </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+            <p>No theaters are showing this movie</p>
+        {% endif %}
+        </div>
+        <div id="rating">
+          <h1>Rating</h1>
+          {% if ratings %}
+            <p>You rated this movie before</p>
+            {% if ratings.score == 1 %}
+            <form  class="rate-form" action="" method="POST" id="{{movie.id}}">
+              {% csrf_token %}
+              <button type="submit" class="fa fa-star fa-3x my-btn checked" id="first"></button>
+              <button type="submit" class="fa fa-star fa-3x my-btn " id="second"></button>
+              <button type="submit" class="fa fa-star fa-3x my-btn " id="third"></button>
+              <button type="submit" class="fa fa-star fa-3x my-btn" id="fourth"></button>
+              <button type="submit" class="fa fa-star fa-3x my-btn" id="fifth"></button>
+            </form>
+            {% elif ratings.score == 2 %}
+            <form  class="rate-form" action="" method="POST" id="{{movie.id}}">
+              {% csrf_token %}
+              <button type="submit" class="fa fa-star fa-3x my-btn checked" id="first"></button>
+              <button type="submit" class="fa fa-star fa-3x my-btn checked" id="second"></button>
+              <button type="submit" class="fa fa-star fa-3x my-btn " id="third"></button>
+              <button type="submit" class="fa fa-star fa-3x my-btn" id="fourth"></button>
+              <button type="submit" class="fa fa-star fa-3x my-btn" id="fifth"></button>
+            </form>
+            {% elif ratings.score == 3%}
+            <form  class="rate-form" action="" method="POST" id="{{movie.id}}">
+              {% csrf_token %}
+              <button type="submit" class="fa fa-star fa-3x my-btn checked" id="first"></button>
+              <button type="submit" class="fa fa-star fa-3x my-btn checked" id="second"></button>
+              <button type="submit" class="fa fa-star fa-3x my-btn checked" id="third"></button>
+              <button type="submit" class="fa fa-star fa-3x my-btn" id="fourth"></button>
+              <button type="submit" class="fa fa-star fa-3x my-btn" id="fifth"></button>
+            </form>
+            {% elif ratings.score == 4 %}
+            <form  class="rate-form" action="" method="POST" id="{{movie.id}}">
+              {% csrf_token %}
+              <button type="submit" class="fa fa-star fa-3x my-btn checked" id="first"></button>
+              <button type="submit" class="fa fa-star fa-3x my-btn checked" id="second"></button>
+              <button type="submit" class="fa fa-star fa-3x my-btn checked" id="third"></button>
+              <button type="submit" class="fa fa-star fa-3x my-btn checked" id="fourth"></button>
+              <button type="submit" class="fa fa-star fa-3x my-btn" id="fifth"></button>
+            </form>
+            {% else%}
+            <form  class="rate-form" action="" method="POST" id="{{movie.id}}">
+              {% csrf_token %}
+              <button type="submit" class="fa fa-star fa-3x my-btn checked" id="first"></button>
+              <button type="submit" class="fa fa-star fa-3x my-btn checked" id="second"></button>
+              <button type="submit" class="fa fa-star fa-3x my-btn checked" id="third"></button>
+              <button type="submit" class="fa fa-star fa-3x my-btn checked" id="fourth"></button>
+              <button type="submit" class="fa fa-star fa-3x my-btn checked" id="fifth"></button>
+            </form>
+            {% endif %}
+          {% else %}
+          <form  class="rate-form" action="" method="POST" id="{{movie.id}}">
+            {% csrf_token %}
+            <button type="submit" class="fa fa-star fa-3x my-btn " id="first"></button>
+            <button type="submit" class="fa fa-star fa-3x my-btn " id="second"></button>
+            <button type="submit" class="fa fa-star fa-3x my-btn " id="third"></button>
+            <button type="submit" class="fa fa-star fa-3x my-btn" id="fourth"></button>
+            <button type="submit" class="fa fa-star fa-3x my-btn" id="fifth"></button>
+          </form>
+          <br>
+        <div id="confirm-box"></div>
+        </div>
+        {% endif %}
+      <div id="comments">
+        <h2>Comments</h2>
+        <ul>
+          {% for review in reviews %}
+          <li>
+            <article>
+              <header>
+                {{review.subject}}
+                <p>Made By: {{review.reviewer.username}}</p>
+                <figure class="avatar"><img src="/static/img/avatar.png" alt=""></figure>
+                <p> Time: {{review.last_updated}}</p>
+              </header>
+              <div class="comcont">
+                <p>{{review.idea_on_movie}}</p>
+              </div>
+            </article>
+          </li>
+          {% endfor %}
+        </ul>
+        <h2>Write A Comment</h2>
+        <a class="btn btn-primary" href="{% url 'review_movie' movie.slug %}" role="button">Review Movie</a>
+      </div>
+
+      
+      <!-- ################################################################################################ -->
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- / main body -->
+    <div class="clear"></div>
+  </main>
+</div>
+
+{% endblock %}

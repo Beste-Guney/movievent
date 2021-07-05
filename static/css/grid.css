@@ -1,0 +1,10 @@
+body{ 
+    display: grid;
+    grid-gap: 0.2vw;
+    height: 100vh;
+    grid-template-columns: 150px 1fr;
+    grid-template-rows: 120px 1fr 61px;
+    grid-template-areas: "header   header"
+                         "sidebar content"
+                         "footer footer";  
+  }

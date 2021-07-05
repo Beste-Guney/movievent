@@ -1,0 +1,15 @@
+{% extends 'index.html '%}
+
+
+{% block content %}
+
+    <div class="wrapper row3">
+  <main class="hoc container clear">
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% include 'includes/form.html' %}
+    <button type="submit" class="btn btn-success">Compare</button>
+  </form></main></div>
+
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+{% block content %}
+  <div id="breadcrumb" class="hoc clear"> 
+    <h6 class="heading">{{theater.name}}</h6>
+  </div>
+<div class="wrapper row3">
+  <main class="hoc container clear"> 
+    <!-- main body -->
+    <!-- ################################################################################################ -->
+    <div class="content"> 
+      <!-- ################################################################################################ -->
+      <div id="gallery">
+        <figure>
+            <ul class="nospace clear">
+            {% for x in theater.movies.all %}
+            {% if forloop.counter0|divisibleby:4 %}
+                 <li class="one_quarter first center"><a href="{% url 'movie' x.slug %}">Movie Details<img src="{{x.poster_path}}" alt=""></a></li>
+            {% else %}
+                <li class="one_quarter center"><a href="{% url 'movie' x.slug %}">Movie Details<img src="{{x.poster_path}}" alt=""></a></li>
+            {% endif %}
+                {% endfor %}
+            </ul>
+        
+        </figure>
+      </div>
+</div>
+{% endblock %}
+

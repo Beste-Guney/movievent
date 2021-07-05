@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div id="breadcrumb" class="hoc clear"> 
+    {% if is_past %}
+        <h6 class="heading">Past Events</h6>
+    {% else %}
+        <h6 class="heading">Upcoming Events</h6>
+    {% endif %}
+  </div>
+  <div class="wrapper row3">
+    <main class="hoc container clear"> 
+      <!-- main body -->
+      <!-- ################################################################################################ -->
+      <div class="content"> 
+        {% if is_past %}
+        {% for x in eventspast %}
+            <li>
+                <h3>{{x.name}}</h3>
+                <p>Owner: {{x.owner.username}}</p>
+                <a href="{% url 'past_event_info' x.slug %}">Click for more details on the event</a>
+            </li>
+        {% endfor %}
+
+    {% else %}
+        {% for x in eventsupcoming %}
+            <li>
+                <h3>{{x.name}}</h3>
+                <p>Owner: {{x.owner.username}}</p>
+                <a href="{% url 'past_event_info' x.slug %}">Click for more details on the event</a>
+            </li>
+        {% endfor %}
+    {% endif %}
+
+</div>
+</main>
+</div>
+    
+{%  endblock %}

@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="wrapper row3">
+    <main class="hoc container clear"> 
+        <div class="content">
+            <h6>Friend Requests</h6>
+            <ul>
+                {% for request in friend_request %}
+                <li><a href="{% url 'profile' request.sender.user.id %}">{{request.sender.user.username}}</a></li>
+                {% empty %}
+                <p>You have no friend request</p>
+                {% endfor %}
+                
+            </ul>
+        </div>
+        
+    </main></div>
+{% endblock %}

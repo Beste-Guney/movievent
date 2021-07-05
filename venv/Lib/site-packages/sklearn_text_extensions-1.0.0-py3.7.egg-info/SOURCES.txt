@@ -1,0 +1,15 @@
+MANIFEST.in
+setup.cfg
+setup.py
+sklearn_text_extensions/__init__.py
+sklearn_text_extensions/ngrams.py
+sklearn_text_extensions/tokens.py
+sklearn_text_extensions.egg-info/PKG-INFO
+sklearn_text_extensions.egg-info/SOURCES.txt
+sklearn_text_extensions.egg-info/dependency_links.txt
+sklearn_text_extensions.egg-info/not-zip-safe
+sklearn_text_extensions.egg-info/requires.txt
+sklearn_text_extensions.egg-info/top_level.txt
+sklearn_text_extensions/feature_extraction/__init__.py
+sklearn_text_extensions/feature_extraction/bm25_tfidf_vectorizer.py
+sklearn_text_extensions/feature_extraction/strict_count_vectorizer.py

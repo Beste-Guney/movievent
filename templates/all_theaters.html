@@ -1,0 +1,51 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+<script>
+  $(document).ready(function() {
+    console.log('entered')
+    $('.js-example-basic-single').select2();
+});
+
+</script>
+
+  <div id="breadcrumb" class="hoc clear"> 
+    <h6 class="heading">Theaters </h6>
+  </div>
+
+
+<div class="wrapper row3">
+  <main class="hoc container clear"> 
+    
+    <div class="one_third first">
+      <h6 class="heading">Select Your City</h6>
+      <select class="js-example-basic-single" name="state" onchange="location = this.value" id="dropbox">
+        {% for city in cities %}
+        <option value="{% url 'filtered_data' city %}">{{city}}</option>
+        {% endfor %}
+        
+      </select>
+    </div>
+    
+    
+
+    <div class="content"> 
+      <!-- ################################################################################################ -->
+      <div id="gallery">
+        <figure>
+          
+            <ul class="nospace clear">
+              <br><br><br>
+            {% for x in theaters %}
+            {% if forloop.counter0|divisibleby:4 %}
+                 <li class="one_quarter first center"><a href="{% url 'theater' x.slug %}"><i>{{x.name}}</i></a></li>
+            {% else %}
+                <li class="one_quarter center "><a href="{% url 'theater' x.slug %}"><i>{{x.name}}</i></a></li>
+            {% endif %}
+                {% endfor %}
+            </ul>
+        </figure>
+        </div>
+    </div>
+    {% endblock %}
