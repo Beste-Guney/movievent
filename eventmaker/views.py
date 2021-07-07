@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from eventmaker.forms import DeterminedEventForm, EventForm, TopicForm, PostForm
-from moviechoose.models import Movie, MovieTheater, Sessions
+from moviechoose.models import Movie, MovieTheater, Session
 from django.utils.text import slugify
 from .models import Event, EventRequest, Post, Topic
 from django.utils import timezone
@@ -17,7 +17,7 @@ def load_theaters(request):
 
 def load_sessions(request):
     movie_id = request.GET.get('movie')
-    sessions = Sessions.objects.filter(movie__id=movie_id).order_by
+    sessions = Session.objects.filter(movie__id=movie_id).order_by
     return render(request, 'includes/sessions_dropdown_list_options.html', {'sessions': sessions})
 
 
@@ -130,7 +130,7 @@ class EventCreationView(View):
 class EventCreationView2(View):
     def get(self, request, movie_name, theater_name, session_id):
         movie = Movie.objects.get(slug=movie_name)
-        session = Sessions.objects.get(id=session_id)
+        session = Session.objects.get(id=session_id)
         theater = MovieTheater.objects.get(slug=theater_name)
         owner = request.user
         form = DeterminedEventForm(initial={'movie': movie, 'theater': theater, 'time': session}, user=request.user)

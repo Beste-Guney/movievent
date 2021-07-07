@@ -33,7 +33,7 @@
               {% for ses in sessions %}
               <tr>
                 {% for theater in theaters %}
-                <td> <a class="btn" href="{% url 'create_specific_event' movie.slug theater.slug ses.id %}" role="button">{{ses.session_times}}</a></td>
+                <td> <a class="btn" href="{% url 'create_specific_event' movie.slug theater.slug ses.id %}" role="button">{{ses.session_timing}}</a></td>
                 {% endfor %}
               </tr>
               {% endfor %}

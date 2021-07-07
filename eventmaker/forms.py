@@ -1,6 +1,6 @@
 from django import forms
 from .models import Event, Topic, Post
-from moviechoose.models import Movie, MovieTheater, Sessions
+from moviechoose.models import Movie, MovieTheater, Session
 from accounts.models import Profile
 
 
@@ -58,13 +58,13 @@ class EventForm(forms.ModelForm):
         owner_profile = Profile.objects.get(user=user)
         self.fields['participants'].queryset = owner_profile.friends.all()
         self.fields['theater'].queryset = MovieTheater.objects.none()
-        self.fields['time'].queryset = Sessions.objects.none()
+        self.fields['time'].queryset = Session.objects.none()
 
         if 'movie' in self.data:
             try:
                 movie_id = int(self.data.get('movie'))
                 self.fields['theater'].queryset = MovieTheater.objects.filter(movies__id=movie_id).order_by('name')
-                self.fields['time'].queryset = Sessions.objects.filter(movie__id=movie_id)
+                self.fields['time'].queryset = Session.objects.filter(movie__id=movie_id)
             except (ValueError, TypeError):
                 pass  
         elif self.instance.pk:

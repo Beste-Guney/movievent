@@ -6,7 +6,7 @@ from django.utils.text import slugify
 from django.views import View
 from django.views.generic import ListView
 from django.http import HttpResponse, response, JsonResponse
-from .models import MovieTheater, Movie, Ratings, Sessions, Review, Ratings
+from .models import MovieTheater, Movie, Ratings, Session, Review, Ratings
 from eventmaker.models import Event, EventRequest
 from django.core import paginator
 from accounts.models import Profile
@@ -36,7 +36,7 @@ class SpecificMovieView(View):
             elif r.reviewer == request.user:
                 actual_reviews.append(r)
         theaters = MovieTheater.objects.filter(movies__title=movie.title)
-        sessions = Sessions.objects.filter(movie=movie)
+        sessions = Session.objects.filter(movie=movie)
         ratings = Ratings.objects.filter(rater=request.user, movie=movie)
         if ratings:
             rate = ratings[0]

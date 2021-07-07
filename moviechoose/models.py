@@ -28,13 +28,13 @@ class MovieTheater(models.Model):
         return self.name
 
 
-class Sessions(models.Model):
+class Session(models.Model):
     movie = models.ManyToManyField('Movie')
     theater = models.ManyToManyField('MovieTheater')
-    session_times = models.CharField(max_length=1000, null=True)
+    session_timing = models.CharField(max_length=1000, null=True)
 
     def __str__(self):
-        return self.session_times
+        return self.session_timing
 
 
 class Review(models.Model):

@@ -85,9 +85,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'movieproject',
         'USER': 'root',
-        'PASSWORD':'beste2001B.',
-        'PORT':3306,
-        'HOST':'127.0.0.1',
+        'PASSWORD': 'beste2001B.',
+        'PORT': 3306,
+        'HOST': '127.0.0.1',
     }
 }
 

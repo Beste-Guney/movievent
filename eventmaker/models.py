@@ -1,5 +1,5 @@
 from django.db import models
-from moviechoose.models import Movie, MovieTheater,Sessions
+from moviechoose.models import Movie, MovieTheater,Session
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
 from django.db.models.fields import DateTimeField,DateField
@@ -14,7 +14,7 @@ class Event(models.Model):
     participants = models.ManyToManyField(User)
     movie = models.ForeignKey(Movie, related_name="movie_name", on_delete=CASCADE)
     theater = models.ForeignKey(MovieTheater, related_name="movietheater_name", on_delete=CASCADE, null=True)
-    time = models.ForeignKey(Sessions, related_name='session_time', on_delete=CASCADE, null=True)
+    time = models.ForeignKey(Session, related_name='session_time', on_delete=CASCADE, null=True)
     date = models.DateField(auto_now=False, auto_now_add=False, null=True)
     slug = models.CharField(max_length=100, null=True)
     
