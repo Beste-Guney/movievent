@@ -43,15 +43,11 @@ def get_recommended_movies(request):
     all_movies = Movie.objects.all()
     ratings = Ratings.objects.filter(rater=request.user)
 
-    for mov in all_movies:
-        movie_list.append(mov)
+    movie_list = list(all_movies)
 
     for r in ratings:
         if r.score >= 4:
             fav_movies.append(r.movie)
-
-    for f in fav_movies:
-        print(f.title)
 
     if not fav_movies:
         recommended_movies = random.sample(movie_list, 5)
@@ -65,7 +61,7 @@ def get_recommended_movies(request):
                 movie = Movie.objects.get(id=d[0])
                 recommended_movies.append(movie)
     if len(recommended_movies) > 15:
-        recommended_movies = random.sample(recommended_movies,15)
+        recommended_movies = random.sample(recommended_movies, 15)
 
     return recommended_movies
 

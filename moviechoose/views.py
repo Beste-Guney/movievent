@@ -1,20 +1,12 @@
 import random
-
-from django import template
 from django.shortcuts import get_object_or_404, render, redirect
-from django.utils.text import slugify
 from django.views import View
 from django.views.generic import ListView
-from django.http import HttpResponse, response, JsonResponse
 from .models import MovieTheater, Movie, Ratings, Session, Review, Ratings
 from eventmaker.models import Event, EventRequest
-from django.core import paginator
 from accounts.models import Profile
-from django.contrib.auth import user_logged_in
 from django.http import JsonResponse
 from .forms import ReviewForm
-from model_utils.managers import QueryManager
-from django.db.models.query import QuerySet
 from notifications.models import Notification
 from movie_recommend.views import get_recommended_movies, get_distance_between_clusters, get_distance_between_centers, \
     k_means_movie, \

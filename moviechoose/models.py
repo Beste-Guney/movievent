@@ -46,12 +46,13 @@ class Review(models.Model):
 
 
 class Ratings(models.Model):
-    movie = models.ForeignKey(Movie, related_name='movie_rating', null= True, on_delete=CASCADE)
+    movie = models.ForeignKey(Movie, related_name='movie_rating', null=True, on_delete=CASCADE)
     score = models.IntegerField(default=0, validators=[
         MaxValueValidator(5),
         MinValueValidator(0),
         ]
     )
-    rater = models.ForeignKey(User, related_name='movie_rater', null=True,on_delete=CASCADE)
+    rater = models.ForeignKey(User, related_name='movie_rater', null=True, on_delete=CASCADE)
+
     def __str__(self):
         return str(self.pk)

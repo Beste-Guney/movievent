@@ -15,11 +15,11 @@
       <div class="scrollable">
         {% if not is_self %}
         {% if is_there_request %}
-        <a class="btn btn-primary" href="{% url 'accept_event_request' event_request.id %}" role="button" >Join Event</a>
-        <a class="btn btn-primary" href="{% url 'decline_event_request' event_request.id %}" role="button" >Decline Event</a>
+        <a class="btn btn-primary" href="{% url 'accept_event_request' event_request.id %}" role="button" onclick="return confirm('Are you sure joining this event?');">Join Event</a>
+        <a class="btn btn-primary" href="{% url 'decline_event_request' event_request.id %}" role="button" onclick="return confirm('Are you sure declining this event request?');">Decline Event</a>
         {% else %}
         <a class="btn btn-primary" href="{% url 'create_topic' event.id %}" role="button">Review Event</a>
-        <a class="btn btn-primary" href="{% url 'leaveEvent' event.id %}" role="button">Leave Event</a>
+        <a class="btn btn-primary" href="{% url 'leaveEvent' event.id %}" role="button" onclick="return confirm('Are you sure leaving this event?');">Leave Event</a>
         {% endif %}
         {% else %}
         <a class="btn btn-primary" href="{% url 'cancel_event' event.id %}" role="button" onclick="return confirm('Are you sure canceling this event?');">Cancel Event</a>

@@ -7,7 +7,6 @@
     console.log('entered')
     $('.js-example-basic-single').select2();
 });
-
 </script>
 
   <div id="breadcrumb" class="hoc clear"> 
@@ -20,7 +19,8 @@
     
     <div class="one_third first">
       <h6 class="heading">Select Your City</h6>
-      <select class="js-example-basic-single" name="state" onchange="location = this.value" id="dropbox">
+      <select class="js-example-basic-single" name="dropbox" onchange="location = this.value" id="dropbox">
+        <option value="#"></option>
         {% for city in cities %}
         <option value="{% url 'filtered_data' city %}">{{city}}</option>
         {% endfor %}

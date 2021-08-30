@@ -89,6 +89,14 @@ DATABASES = {
         'PORT': 3306,
         'HOST': '127.0.0.1',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'movieproject',
+    #     'USER': 'movie',
+    #     'PASSWORD': 'pass',
+    #     'PORT': 3306,
+    #     'HOST': 'db',
+    # }
 }
 
 

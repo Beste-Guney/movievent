@@ -44,7 +44,7 @@ class SignUpView(View):
             return render(request, 'signup.html', {'form':form})
 
 
-class AccountView(LoginRequiredMixin ,View):
+class AccountView(LoginRequiredMixin, View):
     login_url = 'login'
     redirect_field_name = 'redirect_to'
 
